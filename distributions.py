@@ -41,6 +41,8 @@ for event in events:
         coeff_a.append(func.GetParameter(0))
         coeff_b.append(func.GetParameter(1))
 
-hist_angle = ROOT.TH1D('angle', 'angle', 100, -0.01, 0.01)
-for angle in coeff_b:
-    hist_angle.Fill(ROOT.TMath.ATan(angle))
+hist_angle = ROOT.TH1D('angle', 'angle', 100, -10, 10)
+hist_pos = ROOT.TH1D('position', 'position', 100, -100, 100)
+for pos, angle in zip(coeff_a, coeff_b):
+    hist_pos.Fill(pos)
+    hist_angle.Fill(ROOT.TMath.ATan(angle) * 180 / ROOT.TMath.Pi())
